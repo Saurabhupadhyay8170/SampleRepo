@@ -1,0 +1,17 @@
+{% extends 'base/SportpersonDash.html' %}
+{% block content %}
+
+<section class="home">
+    <div class="text">DASHBOARD FOR USER </div>
+    <div class="cont">
+        <div class="box1">
+            
+            If you have filled TUE form :
+            <a class="btn" href="{% url 'stage' %}">Check Status</a>
+            <a style="color:white;" href="{% url 'tasks' %}">&#8592; Back</a>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

@@ -1,0 +1,1219 @@
+{% comment %} {% extends 'base/maindash.html' %}  {% endcomment %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGINSIDEBAR</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+  <style>
+    /* Google Font Import - Poppins */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    ol, ul {
+      padding-left: 0rem;
+  }
+  a{
+    color:#900808;
+  }
+
+    * {
+        margin: -3px;
+        padding: 3px;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      /* ===== Colors ===== */
+      --body-color:rgb(203 207 197);
+      --sidebar-color: #5d0c0c;
+      --primary-color: #695CFE;
+      --primary-color-light: #F6F5FF;
+      --toggle-color: rgb(25, 12, 12);
+      --text-color: #ffff;
+
+      /* ====== Transition ====== */
+      --tran-03: all 0.2s ease;
+      --tran-03: all 0.3s ease;
+      --tran-04: all 0.3s ease;
+      --tran-05: all 0.3s ease;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--body-color);
+      transition: var(--tran-05);
+    }
+
+    ::selection {
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+
+    body.dark {
+      --body-color: #18191a;
+      --sidebar-color: #242526;
+      --primary-color: #3a3b3c;
+      --primary-color-light: #3a3b3c;
+      --toggle-color: #fff;
+      --text-color: #ccc;
+    }
+
+    /* -------------------------------------------- Sidebar  CSS  -----------------------------------*/
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 320px;
+      padding: 10px 14px;
+      background: var(--sidebar-color);
+      transition: var(--tran-05);
+      z-index: 100;
+    }
+
+    .sidebar.close {
+      width: 69px;
+    }
+
+ 
+    .sidebar li {
+      height: 50px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .sidebar header .image,
+    .sidebar .icon {
+      min-width: 60px;
+      border-radius: 6px;
+    }
+
+    .sidebar .icon {
+      min-width: 60px;
+      border-radius: 6px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .sidebar .text,
+    .sidebar .icon {
+      color: var(--text-color);
+      transition: var(--tran-03);
+    }
+
+    .sidebar .text {
+      font-size: 17px;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 1;
+    }
+
+    .sidebar.close .text {
+      opacity: 0;
+    }
+
+    /* =========================== */
+
+    .sidebar header {
+      position: relative;
+    }
+
+    .sidebar header .image-text {
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar header .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header .image-text .name {
+      margin-top: 2px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    header .image-text .profession {
+      font-size: 16px;
+      margin-top: -2px;
+      display: block;
+    }
+
+    .sidebar header .image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar header .image img {
+      width: 40px;
+      border-radius: 6px;
+    }
+
+    .sidebar header .toggle {
+      position: absolute;
+      top: 50%;
+      right: -25px;
+      transform: translateY(-50%) rotate(180deg);
+      height: 25px;
+      width: 25px;
+      background-color: var(--primary-color);
+      color: var(--sidebar-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      transition: var(--tran-05);
+    }
+
+    body.dark .sidebar header .toggle {
+      color: var(--text-color);
+    }
+
+    .sidebar.close .toggle {
+      transform: translateY(-50%) rotate(0deg);
+    }
+
+    .sidebar .menu {
+      margin-top: 40px;
+    }
+
+    .sidebar li.search-box {
+      border-radius: 6px;
+      background-color: #27428c;
+      cursor: pointer;
+      transition: var(--tran-05);
+    }
+
+    .sidebar li.search-box input {
+      height: 100%;
+      width: 100%;
+      outline: none;
+      border: none;
+      background-color: var(--primary-color-light);
+      color: black;
+      border-radius: 6px;
+      font-size: 17px;
+      font-weight: 500;
+      transition: var(--tran-05);
+    }
+
+    .sidebar li a {
+      list-style: none;
+      height: 100%;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: var(--tran-03);
+    }
+
+    .sidebar li a:hover {
+      background-color: var(--primary-color);
+    }
+
+    .sidebar li a:hover .icon,
+    .sidebar li a:hover .text {
+      color: var(--sidebar-color);
+    }
+
+    body.dark .sidebar li a:hover .icon,
+    body.dark .sidebar li a:hover .text {
+      color: var(--text-color);
+    }
+
+    .sidebar .menu-bar {
+      height: calc(100% - 55px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: scroll;
+      overflow-x:hidden;
+    }
+
+    .menu-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sidebar .menu-bar .mode {
+      border-radius: 6px;
+      background-color: #575097;
+      position: relative;
+      transition: var(--tran-05);
+    }
+
+    .menu-bar .mode .sun-moon {
+      height: 50px;
+      width: 60px;
+    }
+
+    .mode .sun-moon i {
+      position: absolute;
+    }
+
+    .mode .sun-moon i.sun {
+      opacity: 0;
+    }
+
+    body.dark .mode .sun-moon i.sun {
+      opacity: 1;
+    }
+
+    body.dark .mode .sun-moon i.moon {
+      opacity: 0;
+    }
+
+    .menu-bar .bottom-content .toggle-switch {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      min-width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .toggle-switch .switch {
+      position: relative;
+      height: 22px;
+      width: 40px;
+      border-radius: 25px;
+      background-color: var(--toggle-color);
+      transition: var(--tran-05);
+    }
+   
+
+    .switch::before {
+      content: '';
+      position: absolute;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%);
+      background-color: var(--sidebar-color);
+      transition: var(--tran-04);
+    }
+
+    body.dark .switch::before {
+      left: 20px;
+    }
+
+    .home {
+      position: absolute;
+      top: 0;
+      top: 0;
+      left: 250px;
+      height: 100vh;
+      width: calc(100% - 250px);
+      background-color: var(--body-color);
+      transition: var(--tran-05);
+    }
+
+    .home .text {
+      font-size: 30px;
+      font-weight: 500;
+      color: var(--text-color);
+      padding: 12px 60px;
+    }
+
+    .sidebar.close~.home {
+      left: 78px;
+      height: 100vh;
+      width: calc(100% - 78px);
+    }
+
+    body.dark .home .text {
+      color: white;
+    }
+
+    /* SECTION CSS */
+    .box1 {
+      display: flex;
+      box-sizing: border-box;
+      border: 2px solid red;
+      align-items: stretch;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 20px;
+      margin: 12px;
+      margin-left: 35px;
+      border-radius: 29px;
+      box-shadow: 2px 2px 2px 2px solid red;
+      flex-wrap: wrap;
+      box-shadow: 3px 7px #7d0000;
+      /* width: fit-content; */
+
+
+
+
+
+  }
+
+  #t {
+      margin-left: -3.5em;
+      margin-top: -3.95em;
+      padding-left: 22px;
+  }
+
+  body.dark .box1 #t {
+      color: white;
+      border-color: #00ffb6;
+      /* box-shadow: 3px 4px #3e338f; */
+  }
+
+  .btn {
+      background: #900808;
+      border: 12px balc;
+      border-radius: 8px;
+      width: 126px;
+      padding: 4px;
+      color: white;
+      {% comment %} margin-left: -4.5em;
+      margin-bottom: -6.5em;
+      margin-top: 3.5em; {% endcomment %}
+      display: flex;
+      cursor: pointer;
+  }
+
+  .box1 .btn :hover {
+      background-color: var(--primary-color);
+      transition: 0.05s;
+  }
+
+  a {
+      text-decoration: none;
+  }
+
+  a:hover {
+      color: aqua;
+
+  }
+   {% comment %}task_list css  {% endcomment %}
+
+   .task-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-top: 1px solid #dfe4ea;
+    overflow: hidden;
+ }
+ 
+ .task-title {
+    display: flex;
+    padding: 20px;
+ }
+ 
+ .task-title a {
+    text-decoration: none;
+    color: #4b5156;
+    margin-left: 10px;
+ }
+ 
+ .task-complete-icon {
+    height: 20px;
+    width: 20px;
+    background-color: rgb(105, 192, 105);
+    border-radius: 50%;
+ }
+ 
+ .task-incomplete-icon {
+    height: 20px;
+    width: 20px;
+    background-color: rgb(218, 218, 218);
+    border-radius: 50%;
+ }
+ 
+ .delete-link {
+    text-decoration: none;
+    font-weight: 900;
+    color: #cf4949;
+    font-size: 22px;
+    line-height: 0;
+    padding: 20px 0px;
+ }
+ 
+ /*Handle Classes*/
+ 
+ .handle {
+    display: inline-block;
+    padding: 20px 16px;
+    cursor: grab;
+    user-select: none;
+ }
+ 
+ .handle:after,
+ .handle:before {
+    display: block;
+    content: "";
+ }
+ 
+ .handle:active,
+ .handle:active:before,
+ .handle:active:after {
+    cursor: grabbing;
+ }
+ 
+ .dropArea {
+    background-color: #f1f2f6;
+    color: black;
+    border: #ced6e0 1px solid;
+ }
+ 
+ .selectedTask {
+    opacity: 0.6;
+ }
+ 
+ 
+ #add-link {
+    color: #EB796F;
+    text-decoration: none;
+    font-size: 42px;
+    text-shadow: 1px 1px #81413b;
+ }
+ 
+ {% comment %} #search-add-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+ } {% endcomment %}
+ 
+ @media screen and (max-width:320px) {
+    {% comment %} #search-add-wrapper {
+        padding: 10px;
+    } {% endcomment %}
+ }
+ 
+ input[type=text],
+ input[type=password],
+ textarea {
+    border: 1px solid #757575;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+ }
+ 
+ label {
+    padding-top: 10px !important;
+    display: block;
+ }
+ 
+ ::placeholder {
+    font-weight: 300;
+    opacity: 0.5;
+ }
+ 
+ {% comment %} .button {
+    border: 1px solid #757575;
+    background-color: #FFF;
+    color: #EB796F;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+ } {% endcomment %}
+ 
+ {% comment %} .card-body {
+    padding: 20px;
+ } {% endcomment %}
+
+
+ {% comment %} status {% endcomment %}
+ .box2 {
+  display: flex;
+  box-sizing: border-box;
+
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+
+  margin: auto;
+  margin-top: 10.5em;
+  margin-left: 30px;
+  border-radius: 9px;
+  flex-wrap: wrap;
+  background: #ffffffff;
+  /* opacity: 0.09; */
+  background: hsl(0deg 0% 100% / 14%);
+}
+.box4 {
+  display: flex;
+  box-sizing: border-box;
+
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  {% comment %} padding: 100px; {% endcomment %}
+
+  margin: auto;
+  margin-top: 3em;
+  {% comment %} margin-left: 30px; {% endcomment %}
+  border-radius: 9px;
+  flex-wrap: wrap;
+  background: #ffffffff;
+  /* opacity: 0.09; */
+  background: hsl(0deg 0% 100% / 14%);
+}
+.box5 {
+  display: flex;
+  box-sizing: border-box;
+
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+
+  margin: auto;
+  {% comment %} margin-top: 3em; {% endcomment %}
+  margin-left: 30px;
+  border-radius: 9px;
+  flex-wrap: wrap;
+  background: #ffffffff;
+  /* opacity: 0.09; */
+  background: hsl(0deg 0% 100% / 14%);
+}
+.contaner_button {
+  justify-items: flex-start;
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: wrap;
+  padding: 16px;
+  background: #c2baac;
+  margin: auto;
+  margin-left: 25px;
+  margin-right: 15px;
+  border-radius: 9px;
+}
+.btn {
+{% comment %} padding: 1em 2.1em 1.1em; {% endcomment %}
+border-radius: 9px;
+{% comment %} margin: 8px 8px 8px 8px; {% endcomment %}
+color: #fbdedb;
+background-color: #900808;
+display: inline-block;
+
+-webkit-transition: 0.3s;
+-moz-transition: 0.3s;
+-o-transition: 0.3s;
+transition: 0.3s;
+font-family: sans-serif;
+font-weight: 800;
+font-size: .85em;
+margin-top: 7.5px;
+
+text-align: center;
+text-decoration: none;
+-webkit-box-shadow: 0em -0.3rem 0em rgba(0, 0, 0, 0.1) inset;
+-moz-box-shadow: 0em -0.3rem 0em rgba(0, 0, 0, 0.1) inset;
+box-shadow: 0em -0.3rem 0em rgba(0, 0, 0, 0.1) inset;
+position: relative;
+}
+.btn:hover, .btn:focus {
+opacity: 0.8;
+}
+.btn:active {
+-webkit-transform: scale(0.80);
+-moz-transform: scale(0.80);
+-ms-transform: scale(0.80);
+-o-transform: scale(0.80);
+transform: scale(0.80);
+}
+.btn.block {
+display: block !important;
+}
+
+
+
+/* Colours */
+
+.purple {
+background-color: #900808;
+}
+
+.box3 {
+  display: flex;
+  box-sizing: border-box;
+  {% comment %} border: 2px solid red; {% endcomment %}
+  {% comment %} align-items: center; {% endcomment %}
+  justify-content: space-between;
+  flex-direction: column;
+  padding-left: 18px;
+  {% comment %} padding-top: 5px; {% endcomment %}
+  margin-right: 30px;
+  {% comment %} margin: auto; {% endcomment %}
+  {% comment %} margin-top: 10.5em; {% endcomment %}
+  margin-left: 30px;
+  border-radius: 9px;
+  flex-wrap: wrap;
+  background: #ffffffff;
+  /* opacity: 0.09; */
+  background: hsl(0deg 0% 100% / 14%);
+}
+{% comment %} doctor dashboard css {% endcomment %}
+.tm-sidebar {
+    box-sizing: border-box;
+    width: 200px !important;
+    overflow: auto;
+}
+.tm-menu {
+	margin-bottom: 50px;
+}
+.tm-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 15px 0;
+    background-color: #222222;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 200px!important;
+}
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: #1e87f0;
+}
+.uk-active .uk-icon {
+	color: #1e87f0;
+}
+.tm-item {
+	border-radius: 10px;
+}
+.tm-image {
+	opacity: 0.3;
+	border-radius: 10px;
+	min-height: 130px;
+}
+@media (max-width: 767px) {
+.tm-image {
+	min-height: 100px;
+}
+}
+.tm-chart {
+	position: relative; 
+	height: 270px; 
+	margin: 0 auto;
+}
+#uk-counter-d .counter-value {
+	animation: uk-counter-d 3000ms;
+}
+@keyframes uk-counter-d {
+from {
+	stroke-dashoffset: 753.982236862;
+}
+to {
+	stroke-dashoffset: 0;
+}
+}
+#uk-counter-user .counter-value {
+	animation: uk-counter-user 3000ms;
+}
+@keyframes uk-counter-user {
+from {
+	stroke-dashoffset: 753.982236862;
+}
+to {
+	stroke-dashoffset: 0;
+}
+}
+.tm-badge {
+    margin-top: -30px;
+    margin-right: -30px;
+    position: absolute;
+}
+.tm-badge-m {
+    margin-top: -15px;
+    margin-left: 15px;
+    position: absolute;
+}
+.comment-badge {
+    margin-top: -30px;
+    margin-left: -15px;
+}
+.tm-ripple {
+	display: inline-block;
+	position: absolute;
+	width: 65px;
+	height: 65px;
+}
+.tm-ripple div {
+	position: absolute;
+	border: 3px solid #fff;
+	opacity: 0.3;
+	border-radius: 50%;
+	animation: tm-ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.tm-ripple div:nth-child(2) {
+	animation-delay: -1s;
+}
+@keyframes tm-ripple {
+	0% {
+		top: 19px;
+		left: 19px;
+		width: 20px;
+		height: 20px;
+		opacity: 0.3;
+	}
+	100% {
+		top: 0;
+		left: 0;
+		width: 60px;
+		height: 60px;
+		opacity: 0;
+	}
+}
+.tm-cat-s {
+	display: none;
+}
+
+.uk-switch {
+  position: relative;
+  display: inline-block;
+  height: 19px;
+  width: 38px;
+}
+.uk-switch input {
+  display:none;
+}
+.uk-switch-slider {
+  background-color: rgba(0,0,0,0.22);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-radius: 500px;
+  bottom: 0;
+  cursor: pointer;
+  transition-property: background-color;
+	transition-duration: .2s;
+  box-shadow: inset 0 0 2px rgba(0,0,0,0.07);
+}
+.uk-switch-slider:before {
+  content: '';
+  background-color: #fff;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  left: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  transition-property: transform, box-shadow;
+	transition-duration: .2s;
+}
+input:checked + .uk-switch-slider {
+  background-color: #39f !important;
+}
+input:checked + .uk-switch-slider:before {
+  transform: translateX(19px);
+}
+input:checked + .uk-switch-slider.uk-switch-s {
+  background-color: #32d296 !important;
+}
+input:checked + .uk-switch-slider.uk-switch-d {
+  background-color: #f0506e !important;
+}
+.uk-border-rounded {
+	border-radius: 10px;
+}
+.uk-notification-message {
+	border-radius: 10px;
+	box-shadow: 0 17px 25px -8px rgba(71,71,85,0.6);
+}
+.uk-modal-dialog {
+	border-radius: 15px;
+}
+.uk-modal-header {
+    background: transparent;
+	padding: 15px 20px;
+}
+.uk-modal-body {
+    padding: 20px;
+}
+.uk-modal-footer {
+    background: transparent;
+	padding: 15px 20px;
+}
+.uk-tile {
+	border-radius: 15px;
+}
+td label {
+	cursor: pointer;
+}
+.report-box {
+    position: relative;
+}
+.report-box:before {
+    content: "";
+    width: 90%;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.75rem;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.7);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
+}
+{% comment %} doctor dashboard {% endcomment %}
+.sec3 {
+  border: 2px solid grey;
+  width: 100%;
+  height: 100vh;
+  background: url({% static "base/doct.jpg" %});
+  /* background: #c2b6a1; */
+}
+
+.doctor {
+  text-align: center;
+  font-size: 23px;
+  font-weight: 900;
+  margin-top: 0.5em;
+  font-family: Algerian;
+  color: wheat;
+  font-style: oblique;
+  text-transform: uppercase;
+}
+
+
+
+.btn-secondary {
+  color: #fff;
+  background-color: #900808;
+  border-color: #900808;
+  font-weight: 600;
+}
+
+.brief1 {
+  flex-flow: row;
+  margin-top: 0.5em;
+  padding: 1.5em;
+  border: 2px solid #580000;
+  box-sizing: border-box;
+  box-shadow: 3px 0px 3px 5px #900808;
+  display: flex;
+  background: hsl(0deg 0% 72% / 40%);
+  justify-content: space-around;
+  align-items: stretch;
+
+}
+
+.card {
+  height: 13.5em;
+  margin-bottom: 8px;
+  background: #b2b2a5;
+  box-shadow: 2px 2px 2px 3px;
+
+}
+
+
+
+
+
+@media (max-width : 730px) {
+  .brief {
+      flex-direction: column;
+  }
+}
+
+  </style>
+
+
+</head>
+
+<body>
+    {% if user.is_authenticated and user.is_staff %}
+{% include 'base/doctorLog.html' %}
+
+{% else %}
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+        <span class="image">
+          <a href="/">
+         <img src="{% static 'base/sih4.png' %}" alt=""></a>
+        </span>
+
+        <div class="text logo-text">
+          <span class="name">Hello {{request.user|title}}</span>
+        </div>
+      </div>
+
+      <i class='bx bx-chevron-right toggle'></i>
+    </header>
+   
+    <div class="menu-bar">
+      <div class="menu">
+
+        {% comment %} <li class="search-box">
+          <i class='bx bx-search icon'></i>
+          <input type="text" placeholder="Search Query..">
+        </li> {% endcomment %}
+
+        <form method="GET" style="display: flex;">
+            <i class='bx bx-search icon' type="submit" ></i>
+            <input type='text' name='search-area' placeholder="Search Query" value="{{search_input}}">
+            <input class="button" type="submit" value='>>'>
+        </form>
+
+        <ul class="menu-links">
+          <li class="nav-link">
+            <a href="{% url 'tue' %}">
+              <i class='bx bx-info-circle icon' ></i>
+              <span class="text nav-text">TUE Info.</span>
+            </a>
+          </li>
+        
+
+          <li class="nav-link">
+            <a href="{% url 'upload' %}">
+              <i class='bx bx-download icon'></i>
+              <span class="text nav-text">Download TUE Form</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="{% url 'tue_form' %}">
+              <i class='bx bx-file icon'></i>
+              <span class="text nav-text">Online Apply For TUE.</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="{% url 'stage' %}">
+              <i class='bx bx-wallet icon'></i>
+              <span class="text nav-text">Check Status</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="{%url 'prescription'%}">
+              <i class='bx bx-plus-medical icon' ></i>
+              <span class="text nav-text">Doctor's Prescription</span>
+            </a>
+          </li>
+
+          <li class="nav-link">
+            <a href="{%url 'drugs'%}">
+              <i class='bx bx-capsule icon' ></i>
+              <span class="text nav-text">PEDs LIST </span>
+            </a>
+          </li>
+
+         <li class="nav-link">
+            <a href="/">
+              <i class='bx bx-home-alt icon'></i>
+              <span class="text nav-text">Goto Home</span>
+            </a>
+          </li> 
+          {% comment %} <li class="nav-link">
+            <div class="col-md-12" style="font-size:1.5em;">
+             <div id='google_translate_element'/>
+            </div>
+          </li>  {% endcomment %}
+        </ul>
+      </div>
+
+
+
+      <div class="bottom-content">
+        <li class="">
+      {% comment %} {% if request.user.is_authenticated and user.is_staff %}
+      {% include 'base/doctorLog.html' %}
+
+{% else %} {% endcomment %}
+      <a href="{% url 'logout' %}">
+         <i class='bx bx-log-out icon'></i>
+        <span class="text nav-text">Logout</span>
+      </a> 
+      {% comment %} {% else %} {% endcomment %}
+      {% if request.user.is_unauthenticated %}
+      <a href="{% url 'login' %}"> <i class='bx bx-log-out icon'></i>
+        <span class="text nav-text">Login</span></a> 
+      {% endif %}
+    </li>
+
+
+      {% comment %} <div class="bottom-content">
+        <li class="">
+          <a href="{% url 'logout' %}">
+            <i class='bx bx-log-out icon'></i>
+            <span class="text nav-text">Logout</span>
+          </a>
+        </li> {% endcomment %}
+
+        <li class="mode">
+          <div class="sun-moon">
+            <i class='bx bx-moon icon moon'></i>
+            <i class='bx bx-sun icon sun'></i>
+          </div>
+          <span class="mode-text text">Dark mode</span>
+
+          <div class="toggle-switch">
+            <span class="switch"></span>
+          </div>
+        </li>
+
+      </div>
+    </div>
+
+  </nav>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+<div class="fluid-container" style="padding-left:350px;padding-right:100px;">
+
+<div class="header-bar">
+    <div>
+        <h1>Hello {{request.user|title}}</h1>
+        Sportsperson
+
+{% for msg in messages %}
+<div class="alert alert-success" role="alert">
+    {{msg}}
+  </div>
+
+{% endfor %}
+
+        <h3 style="margin:0">You have  <i>{{count}}</i> unanswered question{{ count|pluralize:"s" }}</h3>
+    </div>
+
+   
+</div>
+
+
+<div id="search-add-wrapper">
+    
+    <form method="GET">
+        <input type='text' name='search-area' placeholder="Search your question" value="{{search_input}}">
+        <input class="button" type="submit" value='Search'>
+    </form>
+    <div class="d-flex justify-content-between my-3">
+ 
+    {% if tasks|length > 0 %}
+    <a class="btn btn-outline-danger" href="{% url 'task-create' %}">Ask Question</a>
+    {% comment %} <button type="button" class="btn btn-outline-danger">Danger</button> {% endcomment %}
+    {% endif %}
+    {% if request.user.is_authenticated %}
+    <a  class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a> {% else %}
+    <a href="{% url 'login' %}">Login</a> {% endif %}
+    </div>
+    {% comment %} <button type="button" class="btn btn-info">Apply for testing</button> {% endcomment %}
+</div>
+
+
+
+<!-- Hidden form. Form submits new item positions -->
+<form style="display: none;" id="reorderForm" method="post" action="{% url 'task-reorder' %}">
+    {% csrf_token %}
+    <input type="hidden" id="positionInput" name="position">
+</form>
+
+
+
+<div id="tasklist" class="task-items-wrapper">
+    {% for task in tasks %}
+    <div class="task-wrapper" data-position="{{task.pk}}">
+        <div class="task-title">
+            {% if task.complete %}
+            <div class="task-complete-icon"></div>
+            <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i> {% else %}
+            <div class="task-incomplete-icon"></div>
+            <a href="{% url 'task-update' task.id %}">{{task}}</a> {% endif %}
+        </div>
+        <div class="task-controls">
+            <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+            <span class="handle">&nbsp;&#10247;</span>
+        </div>
+    </div>
+
+    {% empty %}
+    <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
+        <h3>You can ask/post your queries/ questions here and the doctor/ physician /staff will reach out to you shortly</h3>
+       <a class="btn" style="" href="{% url 'task-create' %}">Ask</a>
+    </div>
+    {% endfor %}
+</div>
+
+</div>
+
+
+
+
+
+
+{% endif %}
+
+
+
+
+  
+
+
+
+
+
+
+
+  <script>
+    const body = document.querySelector('body'),
+        sidebar = body.querySelector('nav'),
+        toggle = body.querySelector(".toggle"),
+        searchBtn = body.querySelector(".search-box"),
+        modeSwitch = body.querySelector(".toggle-switch"),
+        modeText = body.querySelector(".mode-text");
+
+
+    toggle.addEventListener("click", () => {
+        sidebar.classList.toggle("close");
+    })
+
+    searchBtn.addEventListener("click", () => {
+        sidebar.classList.remove("close");
+    })
+
+    modeSwitch.addEventListener("click", () => {
+        body.classList.toggle("dark");
+
+        if (body.classList.contains("dark")) {
+            modeText.innerText = "Light mode";
+        } else {
+            modeText.innerText = "Dark mode";
+
+        }
+    });
+</script>
+
+</body>
+
+</html>
+
+
+

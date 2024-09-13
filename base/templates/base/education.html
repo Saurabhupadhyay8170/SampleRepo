@@ -1,0 +1,240 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+       {%block title%}Education
+       {%endblock title%}
+
+
+   
+ {%block content%}
+ 
+{% comment %} task_list original {% endcomment %}
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<div class="header-bar">
+    <div>
+        <h1>Hello {{request.user|title}}</h1>
+
+{% for msg in messages %}
+{{msg}}
+{% endfor %}
+
+        <h3 style="margin:0">You have  <i>{{count}}</i> unanswered question{{ count|pluralize:"s" }}</h3>
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'logout' %}">Logout</a> {% else %}
+    <a href="{% url 'login' %}">Login</a> {% endif %}
+</div>
+
+
+<div id="search-add-wrapper">
+    <form method="GET" style="display: flex;">
+        <input type='text' name='search-area' placeholder="Search your query" value="{{search_input}}">
+        <input class="button" type="submit" value='Search'>
+    </form>
+    {% if tasks|length > 0 %}
+    <a id="add-link" href="{% url 'task-create' %}">Add New Query</a>
+    {% endif %}
+    <button type="button" class="btn btn-info">Apply for testing</button>
+</div>
+
+
+<!-- Hidden form. Form submits new item positions -->
+<form style="display: none;" id="reorderForm" method="post" action="{% url 'task-reorder' %}">
+    {% csrf_token %}
+    <input type="hidden" id="positionInput" name="position">
+</form>
+
+
+<div id="tasklist" class="task-items-wrapper">
+    {% for task in tasks %}
+    <div class="task-wrapper" data-position="{{task.pk}}">
+        <div class="task-title">
+            {% if task.complete %}
+            <div class="task-complete-icon"></div>
+            <i><s><a href="{% url 'task-update' task.id %}">{{task}}</a></s></i> {% else %}
+            <div class="task-incomplete-icon"></div>
+            <a href="{% url 'task-update' task.id %}">{{task}}</a> {% endif %}
+        </div>
+        <div class="task-controls">
+            <a class="delete-link" href="{% url 'task-delete' task.id %}">&#215;</a>
+            <span class="handle">&nbsp;&#10247;</span>
+        </div>
+    </div>
+
+    {% empty %}
+    <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
+        <h3>Ask/Post a query</h3>
+        <h3>Ask a <a style="text-decoration: none; color: aqua;border:2px solid blue;border-radius:15px;background-color:grey;" href="{% url 'task-create' %}">New query</a> ! </h3>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <a href="{% static "base/tue.docx" %}" class="btn btn-light">Download TUE Form</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+  <a href="{% url 'upload' %}">Upload Filled form</a>
+</div>
+<div class="row">
+  <a href="{% url 'tue_form' %}">Fill online TUE form</a>
+</div>
+
+
+{% comment %} education page with api {% endcomment %}
+<h1>
+    Effects of Performance-Enhancing Drugs
+   </h1>
+   <span style="font-weight:900;color: darkblue;">
+    With all the information, attention, and debate over performance-enhancing drugs (or PEDs), many people want to further understand how performance-enhancing drugs affect one’s body. It’s an important area of concern for athletes and at the foundation of why USADA and other anti-doping organizations exist. Simply put, PEDs have the ability or potential to drastically alter the human body and biological functions, including the ability to considerably improve athletic performance in certain instances. These drugs, however, can be extremely dangerous and, in certain situations, deadly. The negative effects these drugs can have on one’s body make USADA’s mission paramount as to why no athlete should ever have to consider PED use to succeed in sport.
+    
+    This section provides answers to common questions about the health and safety risks associated with substances and methods on the WADA Prohibited List (List). It also provides information concerning the legitimate medical use of substances. When these compounds are misused, it constitutes a breach of ethics both by the user and supplier.
+   </span>
+   
+   {% for i in response%}
+   {{i.Country}}
+   {% endfor %}
+
+
+   {% comment %} drugs initial page  {% endcomment %}
+   <div class="container">
+    <div class="row">
+    {%for product in product_objects%}
+    <div class="col-md-4" style="padding:5px;">
+          <div class="card">
+          
+          <div class="card-body">
+          <div id="nm{{product.id}}" class="card-title">
+          {{product.title}}
+          </div>
+      
+    
+          <a href="/{{product.id}}" class="btn btn-info">View</a>
+         
+          </div>
+          </div>
+    </div>
+    {%endfor%}       
+    
+    </div>
+
+    
+      <div class="row">
+       <div class="col-md-3 offset-md-4">
+          <ul class="pagination">
+             {%if product_objects.has_previous%}
+               <li class="page-item">
+                  <a class="page-link" href="?page={{product_objects.previous_page_number}}">Previous</a>
+               </li>
+             {%endif%}
+    
+             <li style="" class="page-item active">
+                  <a class="btn" href="?page={{product_objects.number}}">Current</a>
+               </li>
+    
+             {%if product_objects.has_next%}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{product_objects.next_page_number}}">Next  </a>
+               </li>
+             {%endif%}
+          </ul>
+       </div>
+    </div>
+    
+    </div>
+   </div>  
+
+
+   <div class="row">
+    <div class="col-md-3 offset-md-4">
+       <ul class="pagination">
+          {%if product_objects.has_previous%}
+            <li class="page-item">
+               <a class="page-link" href="?page={{product_objects.previous_page_number}}">Previous</a>
+            </li>
+          {%endif%}
+ 
+          <li style="" class="page-item active">
+               <a class="btn" href="?page={{product_objects.number}}">Current</a>
+            </li>
+ 
+          {%if product_objects.has_next%}
+             <li class="page-item">
+               <a class="page-link" href="?page={{product_objects.next_page_number}}">Next  </a>
+            </li>
+          {%endif%}
+       </ul>
+    </div>
+ </div>
+ 
+ </div>
+
+{% comment %} details page redundant {% endcomment %}
+<div class="sec3">
+  <h1>Details page</h1>
+
+  <div class="container">
+     <div class="row">
+        <div class="col-md-6">
+           <div class="row">
+               <div class="col-md-12">
+                  
+               </div>
+
+           </div>
+        </div>
+        <div class="col-md-6">
+           <div class="row">
+              <div class="col-md-12">
+                 {{product_object.title}}
+              </div>
+           </div>
+           <div class="row">
+              <div class="col-md-12">
+                 {{product_object.cateegory}}
+              </div>
+           </div>
+         
+           <div class="row">
+              <div class="col-md-12">
+                 {{product_object.description}}
+              </div>
+           </div>
+        </div>
+     </div>
+     <button type="button" class="btn btn-info">Know More</button>
+  </div>
+
+ </div>
+
+{%endblock content%}
+
+{% comment %} {% if request.user.is_authenticated and user.is_staff %} {% endcomment %}
+<a href="{% url 'logout' %}">
+   <i class='bx bx-log-out icon'></i>
+  <span class="text nav-text">Logout</span>
+</a> 
+<div class="text logo-text">
+   <span class="name">Hello {{request.user|title}} </span>
+ </div>
+</div>
+{% if request.user.is_authenticated and user.is_staff and user.is_superuser %}Admin
+<a class="nav-link" href="admin/">Admin Login</a>
+{%else%}Doctor
+<a href="/">Home</a>
+<li class="items"><a href="{%url 'doctorReg'%}">doctorReg</a></li>                                                                                                                                                                                                                                  
+{% comment %} {% endif %} {% endcomment %}
+ 
+{%for new in news_objects1%}
+{{new.title}}
+{%endfor%} 
+
+ {% endif %}

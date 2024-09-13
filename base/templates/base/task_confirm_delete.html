@@ -1,0 +1,84 @@
+{% extends 'base/SportpersonDash.html' %}
+{% load static %}
+
+{% block content %}
+
+{% comment %} <div class="header-bar">
+    <a href="{% url 'tasks' %}">&#8592; Go Back</a>
+</div>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        <p>Are your sure you want to delete this Question? <b>"{{task}}"</b> </p>
+        <input class="button" type="submit" value="Delete" />
+    </form>
+</div> {% endcomment %}
+
+
+
+
+{% comment %} <div class="card text-center">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <H5>Upload filled TUE form</h5>
+      <input type="file" name="file">
+      <input type="submit">
+  
+    </form>
+    <a href="{% url 'tasks' %}">&#8592; Back</a>
+    <a class="btn" href="{% url 'stage' %}">Check Status</a>
+  </div>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+</div> {% endcomment %}
+
+
+<section class="home" style="background-image: url('{% static "base/tue1.jpg" %}');height:150vh;">
+  <div class="text">Hello {{request.user|title}}, Thank You For Asking Question </div>
+
+
+
+
+  <div class="cont1">
+
+        <!-- button section  -->
+        <div class="contaner_button">
+    
+       
+            <div class="header-bar">
+                <a href="{% url 'tasks' %}">&#8592; Go Back</a>
+            </div>
+            
+            <div class="card-body">
+                <br>
+                <form method="POST">
+                    {% csrf_token %}
+                    <p>Are your sure you want to delete this Question? <b>"{{task}}"</b> </p>
+                    <input class="btn" type="submit" value="Delete" />
+                </form>
+            </div>
+            
+
+    
+   
+      </div>
+    <div class="box2">
+
+    </div>
+
+
+
+</section>
+
+
+
+
+
+{% endblock content %}

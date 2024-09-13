@@ -1,0 +1,59 @@
+
+
+
+
+<div class="sec3">
+  <!-- <img src="#" alt=""> -->
+  <div class="doctor">
+      <h1> Hello {{request.user}}</h1></div>
+      <div style="text-align: center;">
+      <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+  
+  {% if request.user.is_authenticated and user.is_staff and user.is_superuser %}Admin
+<a class="nav-link" href="admin/">Admin Login</a>
+{%else%} <span style="color:white;padding:30px;">Doctor</span>
+<a class="btn btn-outline-danger" href="/">Home</a>
+
+{%endif%}
+      </div>
+
+      <div class="item_name">
+        <form>
+           <input type="search" style = "    border: 2px solid #f1ebeb;
+           border-radius: 8px;
+           height: 38px;
+           margin-left: 24px;"name="user_name" placeholder="search user">
+           <button style = "margin-left: -1.5em;
+           border: 2px solid #f1ebeb;
+           border-radius: 8px;
+           height: 38px;">
+              <i class="fa fa-search" style="font-size: 18px;">
+              </i>
+           </button>
+        </form>
+       </div> 
+       <h2>Total {{cnt}} questions.</h1>
+  <div class="brief1">
+
+      <div class="row">
+          <!-- card start here for doctor  -->
+          {%for all_ques in total%}
+          <div class="col-sm-6">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">{{all_ques.user}}</h5>
+                      <p class="card-text">{{all_ques.title}}
+                      </p>
+                      <a href="{% url 'task-update' all_ques.id %}" class="btn btn-secondary">Reply</a>
+                  </div>
+              </div>
+          </div>
+          {%endfor%} 
+      </div>
+
+  </div>
+
+
+
+
+</div>

@@ -1,0 +1,62 @@
+{% extends 'base/SportpersonDash.html' %}
+{% load static %}
+
+{% block content %}
+
+
+{% comment %} <div class="card text-center">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <H5>Upload filled TUE form</h5>
+      <input type="file" name="file">
+      <input type="submit">
+  
+    </form>
+    <a href="{% url 'tasks' %}">&#8592; Back</a>
+    <a class="btn" href="{% url 'stage' %}">Check Status</a>
+  </div>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+</div> {% endcomment %}
+
+
+<section class="home" style="background-image: url('{% static "base/tue1.jpg" %}');height:150vh;">
+  <div class="text">Hello <span style="color:#900808;">{{request.user|title}}</span>, Download and Fill the Therapeutic Use Exemption Form </div>
+
+  <div class="cont1">
+
+        <!-- button section  -->
+        <div class="contaner_button">
+          <span>Download TUE Form<br>
+        <a href="{% static "base/tue.docx" %}" class="btn purple circular">Doc Format</a></span>
+        <span>Download TUE Form<br>
+        <a href="{% static "base/tue3.pdf" %}" class="btn purple circular">Pdf Format</a></span>
+        <a href="{% url 'tue' %}" class="btn purple circular">TUE Process</a>
+   
+      </div>
+    <div class="box2">
+      <h5 class="card-title" style="color:white;">Upload file in any format
+        
+      </h5>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <H5>Upload filled TUE form</h5>
+        <input type="file" name="file">
+        <input class="btn" type="submit">
+    
+      </form>
+      <a style="color:white;" href="{% url 'tasks' %}">&#8592; Back</a>
+      <a class="btn" href="{% url 'stage' %}">Check Status</a>
+    </div>
+    </div>
+</section>
+
+
+
+{% endblock content %}

@@ -1,0 +1,390 @@
+{% extends 'base/SportpersonDash.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="container" style="padding-left:20em;">
+    <header  style="
+    margin-left: -11.5em;
+    margin-top: 31px;
+">Hello {{user}}, this is your previosly filled TUE Application</header><br>
+    <div class="header-bar"style="
+    margin-bottom: 23px;
+    border-radius: 8px;
+    border: 3px solid #470202;
+    width: fit-content;
+    
+    margin-left: -12.9em;
+">
+        <a href="{% url 'tasks' %}">&#8592; Go Back</a>
+    </div>
+   
+        <div class="form-first1">
+            <div class="details personal">
+                <span class="title"><h4>1. Personal Details:</h4></span>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label>Full Name:</label>
+                        {{preview.fname}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>Date of Birth:</label>
+                        {{preview.dob}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>Email:</label>
+                        {{preview.email}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>Mobile Number:</label>
+                       {{preview.phone}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>Gender:</label>
+                      {{preview.gender}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>Sport:</label>
+                        {{preview.sport}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="details ID">
+                <span class="title"><h4>Identity Details:</h4></span>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label>ID Type:</label>
+                       {{preview.id_type}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>ID Number:</label>
+                       {{preview.id_no}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>Name on Id:</label>
+                        {{preview.name_on_id}}
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <div class="details address">
+                <span class="title"><h4>Address Details:</h4></span>
+
+                <div class="fields">
+                    <div class="input-field">
+                        <label>Address Type:</label>
+                       {{preview.addType}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>Nationality:</label>
+                       {{preview.nationality}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>State:</label>
+                       {{preview.state}}
+                    </div>
+
+                    <div class="input-field">
+                        <label>District:</label>
+                       {{preview.district}}
+                    </div>
+                    <div class="input-field">
+                        <label>City:</label>
+                       {{preview.city}}
+                    </div>
+                    <div class="input-field">
+                        <label>Postal Code:</label>
+                       {{preview.postal_code}}
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="details application">
+                <span class="title"><h4>2. Previous Application:</h4></span>
+
+                <div class="fields">
+
+                    <div class="input-field">
+                        <label>Have you submitted any previous TUE application(s) to any Anti-Doping Organization for the same condition? </label>
+                      {{preview.select1}}
+                    </div>
+                    <div class="input-field">
+                        <label>For which substance(s) or method(s)?</label>
+                       {{preview.text1}}
+                    </div>
+                    <div class="input-field">
+                        <label>To whom?</label>
+                       {{preview.text2}}
+                    </div>
+                    <div class="input-field">
+                        <label>When?</label>
+                      {{preview.text3}}
+                    </div>
+                    <div class="input-field">
+                        <label>Decision:</label>
+                       {{preview.select2}}
+                    </div>
+                    <div class="input-field">
+                        <label>Discipline:</label>
+                       {{preview.text4}}
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="details retroactive">
+                    <span class="title"><h4>3. Retroactive Application:</h4></span>
+
+                    <div class="fields">
+
+                        <div class="input-field">
+                            <label>Is this a retroactive application?</label>
+                           {{preview.select3}}
+                        </div><br>
+                        <div class="input-field">
+                            <label>If yes, on what date was the treatment started?</label>
+                           {{preview.text5}}
+                        </div>
+
+                        <div class="details medication">
+                            <span class="title"><h2>Do any of the following exceptions apply?(Article 4.1 of the ISTUE):</h2></span>
+                            <div class="fields">
+                                <div class="input-field" style="width: 100%;">
+                                    <h3>4.1(a)</h3>You required emergency or urgent treatment of a medical condition.
+
+                                 {{preview.select4}}
+                       
+                                    <br>
+                                    <div class="fields">
+                                        <div class="input-field" style="width: 100%;">
+                                            <label><h3>4.1(b)</h3>There was insufficient time, opportunity or other exceptional circumstances that prevented you from submitting the TUE application.</label>
+                                           {{preview.select5}}
+                                            <br>
+                                        </div>
+
+                                        <div class="fields">
+                                            <div class="input-field" style="width: 100%;">
+                                                <label><h3>4.1(c)</h3>You were not permitted or required to apply in advance for a TUE as per Click or tap here to enter text. anti-doping rules.</label>
+                                               {{preview.select6}}
+                                                <br>
+                                            </div>
+
+                                            <div class="fields">
+                                                <div class="input-field" style="width: 100%;">
+                                                    <label><h3>4.1(d)</h3>You are a lower-level athlete who is not under<br> the jurisdiction of an International Federation or National Anti-Doping Organization and were tested.</label>
+                                                   {{preview.select7}}
+                                                    <br>
+                                                </div>
+
+                                                <div class="fields">
+                                                    <div class="input-field" style="width: 100%;">
+                                                        <label><h3>4.1(e)</h3>You tested positive after using a substance Out-of-Competition that was only prohibited In-Competition, e.g., S9 glucocorticoids</label>
+                                                       {{preview.select8}}
+                                                        <br>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <br>
+                                                <div class="input-field">
+                                                    <option>
+                                                        <h2>Other Retroactive Applications(4.3):</h2>
+                                                    </option>
+                                                    <label>Please explain(if necessary, attach further documents):</label>
+                                                   {{preview.text5}}
+                                                </div>
+                                                <div class="input-field">
+                                                 <label>Upload documents:</label>
+                                                    {% comment %} <input type="file" name="upload1" placeholder="upload" style="border: none;"> {% endcomment %}
+                                                </div> 
+                                            </div>
+                                            <div class="input-field">
+                                                <label>In rare and exceptional circumstances notwithstanding any other provision in the ISTUE, an Athlete may apply for and be granted retroactive approval for their TUE if, considering the purpose of the Code, it would be manifestly unfair not to grant a retroactive TUE.
+
+                                In order to apply under Article 4.3, please include a full reasoning and attach all necessary supporting documentation. 
+                                </label>
+                                              {{preview.text6}}
+                                            </div>
+                                          
+                                            <div class="details address">
+                                                <h2>Physician to complete sections 4, 5 and 6:</h2><br>
+                                                <span class="title"><h4>4. Medical Information:</h4></span>
+
+                                                <div class="fields">
+                                                    <div class="input-field" style="width: 100%;">
+                                                        <label>Diagnosis (Please use the WHO ICD 11 classification if possible):</label>
+                                                       {{preview.text7}}
+                                                    </div>
+
+
+                                                    <div class="details medication">
+                                                        <span class="title"><h4>5. Medication Details:</h4></span>
+                                                        <div class="fields">
+                                                            <div class="input-field" style="width: 100%;">
+                                                                <label>Prohibited Substance(s)/Method(s) Generic name(s):</label>
+                                                               {{preview.text8}}
+                                                            </div>
+                                                            <div class="fields">
+                                                                <div class="input-field" style="width: 100%;">
+                                                                    <label>Dosage:</label>
+                                                                   {{preview.text9}}
+                                                                </div>
+                                                                <div class="fields">
+                                                                    <div class="input-field" style="width: 100%;">
+                                                                        <label>Route of Administration:</label>
+                                                                       {{preview.text10}}
+                                                                    </div>
+                                                                    <div class="fields">
+                                                                        <div class="input-field" style="width: 100%;">
+                                                                            <label>Frequency:</label>
+                                                                           {{preview.text11}}
+                                                                        </div>
+                                                                        <div class="fields">
+                                                                            <div class="input-field" style="width: 100%;">
+                                                                                <label>Duration of treatment:</label>
+                                                                               {{preview.text12}}
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="details practitionaries">
+                                                                            <span class="title"><h4>6.	Medical Practitioner’s Declaration</h4></span>
+                                                                            <p>I certify that the information in sections 4 and 5 above is accurate. I acknowledge and agree that my personal information may be used by Anti-Doping Organization(s) (ADO)
+                                                                                to contact me regarding this TUE application, to verify the professional assessment in connection with the TUE process, or in connection with Anti-Doping Rule Violation
+                                                                                investigations or proceedings.
+                                                                                <br><br> I further acknowledge and agree that my personal information will be uploaded to the Anti-Doping Administration and Management System (ADAMS) for these purposes
+                                                                                (see [the Insert link/reference to ADO’s privacy policy and] the ADAMS Privacy Policy for more details</p>
+                                                                            <div class="fields">
+                                                                                <div class="input-field">
+                                                                                    <label>Name:</label>
+                                                                                   {{preview.physicianName}}
+                                                                                </div>
+
+                                                                                <div class="input-field">
+                                                                                    <label>Medical speciality:</label>
+                                                                                    {{preview.text13}}
+                                                                                </div>
+                                                                                <div class="input-field">
+                                                                                    <label>License Number:</label>
+                                                                                   {{preview.text14}}
+                                                                                <div class="input-field">
+                                                                                    <label>License Body:</label>
+                                                                                   {{preview.text15}}
+                                                                                <div class="input-field">
+                                                                                    <label>Address:</label>
+                                                                                {{preview.text16}}
+                                                                                </div>
+                                                                                <div class="input-field">
+                                                                                    <label>Nationality:</label>
+                                                                                   {{preview.text17}}
+                                                                                </div>
+
+                                                                                <div class="input-field">
+                                                                                    <label>City:</label>
+                                                                                    {{preview.text18}}
+                                                                                </div>
+
+
+
+                                                                                <div class="input-field">
+                                                                                    <label>Postal Code:</label>
+                                                                                   {{preview.text19}}
+                                                                                </div>
+
+
+                                                                                <div class="input-field">
+                                                                                    <label>Telephone:</label>
+                                                                                  {{preview.text20}}
+                                                                                </div>
+
+                                                                                <div class="input-field">
+                                                                                    <label>Email:</label>
+                                                                                    {{preview.text21}}
+                                                                                </div>
+                                                                                <div class="input-field">
+                                                                                    <label>Fax:</label>
+                                                                                    {{preview.text22}}
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="details declaration">
+                                                                            <span class="title"><h4>7. Athelet's Declaration:</h4></span>
+                                                                            <div>
+                                                                                I {{preview.text23}}, certify that the information set out at sections 1, 2, 3 and 7 is accurate and complete.
+                                                                                I authorize my physician(s) to release the medical information and records that they deem necessary to evaluate the merits of my TUE application to the following recipients:
+                                                                                the Anti-Doping Organization(s) (ADO) responsible for making a decision to grant, reject, or recognize my TUE; the World Anti-Doping Agency (WADA), who is responsible
+                                                                                for ensuring determinations made by ADOs respect the ISTUE; the physicians who are members of relevant ADO(s) and WADA TUE Committees (TUECs) who may need to review my
+                                                                                application in accordance with the World Anti-Doping Code and International Standards; and, if needed to assess my application, other independent medical, scientific or
+                                                                                legal experts.
+
+                                                                            </div><br><br>
+                                                                            <div>I further authorize {{preview.text24}} to release my complete TUE application, including supporting medical information and
+                                                                                records, to other ADO(s) and WADA for the reasons described above, and I understand that these recipients may also need to provide my complete application to their TUEC
+                                                                                members and relevant experts to assess my application.<br><br> I have read and understood the TUE Privacy Notice (below) explaining how my personal information will be
+                                                                                processed in connection with my TUE application, and I accept its terms.
+                                                                            </div><br><br>
+                                                                            <div class="fields">
+                                                                                <div class="input-field">
+                                                                                    <label><h5>Athelete Signature:</h5></label>
+                                                                                    {% comment %} <input type="file" name="upload2" placeholder="Upload Signature" style="border: none;"> {% endcomment %}
+                                                                                </div>
+                                                                                <div class="input-field">
+                                                                                    <label>Date:</label>
+                                                                                   {{preview.date2}}
+                                                                                </div>
+                                                                                <div class="input-field">
+                                                                                    <label><h5>Parent’s/Guardian’s signature:</h5></label>
+                                                                                    {% comment %} <input type="file" name="preview.upload3" placeholder="Upload Signature" style="border: none;"> {% endcomment %}
+                                                                                </div>
+                                                                                <div class="input-field">
+                                                                                    <label>Date:</label>
+                                                                                  {{preview.date3}}
+                                                                                </div>
+                                                                            </div><br>
+                                                                            <p>(If the Athlete is a Minor or has an impairment preventing them from signing this form, a parent or guardian shall sign on behalf of the Athlete)</p>
+                                                                        </div>
+{% comment %}
+                                                                        <button class="sumbit">
+                                                    <span class="btnText">Submit</span>
+                                                    <i class="uil uil-navigator"></i>
+                                                </button>
+
+
+
+
+                                                                    </div>
+                                                                </div> {% endcomment %}
+                                                 
+                                                 <div class="header-bar">
+                                                    <a href="{% url 'tasks' %}">&#8592; Go Back</a>
+                                                </div>                         
+
+
+    </div>
+
+{% endblock content %}

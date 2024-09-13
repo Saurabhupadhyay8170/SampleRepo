@@ -1,0 +1,80 @@
+{% extends 'base/main.html' %}
+
+{%block title%}Drugs
+{%endblock title%}
+
+{% block nav %}
+<div class="item_name">
+ <form>
+    <input type="search" name="item_name" placeholder="search banned drugs" class="form-control form-control-borderless">
+    <button>
+       <i class="fa fa-search" style="font-size: 18px;">
+       </i>
+    </button>
+ </form>
+</div>  
+{% endblock nav %} 
+    
+  {%block content%}
+    
+  <div class="sec3">
+    <!-- <img src="#" alt=""> -->
+    <div class="news">
+        <h1>Prohibited Enhancement Drugs  </h1>
+    </div>
+
+    <div class="brief" style="     margin-top: 4.5em;
+    padding: 1.5em;
+    border: 2px solid #580000;
+    box-sizing: border-box;
+    box-shadow: 3px 0px 3px 5px #900808;">
+
+    <div class="row">
+
+      {%for product in product_objects%}
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <div id="nm{{product.id}}" class="card-title">
+              {{product.title}}
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="/{{product.id}}" class="btn btn-info">View</a>
+          </div>
+        </div>  
+      </div>
+      {%endfor%}
+
+      
+    </div>
+  </div>
+</div>
+
+
+{% comment %} paginator {% endcomment %}
+
+<div class="row mb-3" style="margin-left:15em;">
+  <div class="col-sm-4 themed-grid-col">
+    {%if product_objects.has_previous%}
+    {% comment %} <li class="page-item"> {% endcomment %}
+       <a class="page-link" href="?page={{product_objects.previous_page_number}}">Previous</a>
+    {% comment %} </li> {% endcomment %}
+  {%endif%}
+  </div>
+  <div class="col-sm-4 themed-grid-col">
+    {% comment %} <li style="" class="page-item active"> {% endcomment %}
+      <a class="btn" href="?page={{product_objects.number}}">Current</a>
+   {% comment %} </li> {% endcomment %}
+  </div>
+  <div class="col-sm-4 themed-grid-col">
+    {%if product_objects.has_next%}
+    {% comment %} <li class="page-item"> {% endcomment %}
+      <a class="page-link" href="?page={{product_objects.next_page_number}}">Next  </a>
+   {% comment %} </li> {% endcomment %}
+ {%endif%}
+  </div>
+</div>
+
+
+          {%endblock content%}
+
+

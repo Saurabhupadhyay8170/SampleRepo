@@ -1,0 +1,52 @@
+{% extends 'base/SportpersonDash.html' %}
+{% load static %}
+
+{% block content %}
+
+{% comment %} 
+<div class="header-bar">
+    <a href="{% url 'tasks' %}">&#8592; Back</a>
+</div>
+
+
+<div class="card-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="button" type="submit" value="Submit">
+    </form>
+</div>
+ {% endcomment %}
+
+
+
+<section class="home" style="background-image: url('{% static "base/tue1.jpg" %}');height:150vh;">
+    <div class="text">Hello {{request.user|title}}, Ask your Question here and the physician?doctor will respond to you shortly? </div>
+  
+  
+  
+  
+    <div class="cont1">
+  
+          <!-- button section  -->
+          <div class="box3">
+      
+         
+              <div class="header-bar">
+                  <a href="{% url 'tasks' %}">&#8592; Go Back</a>
+              </div>
+              
+              <div class="card-body">
+                  <br>
+                  <form method="POST" action="">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input class="btn" class="button" type="submit" value="Submit">
+                </form>
+              </div>   
+        </div>
+     
+ 
+  </section>
+
+{% endblock content %}

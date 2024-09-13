@@ -1,0 +1,59 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% comment %} <link rel="stylesheet" href="{% static 'new1.css' %}"> {% endcomment %}
+       {%block title%}News
+       {%endblock title%}
+
+ {%block content%}
+    <div class="sec3">
+        <!-- <img src="#" alt=""> -->
+        <div class="news">
+            <h1>News Glimpse </h1>
+        </div>
+
+        <div class="brief" style="     margin-top: 4.5em;
+        padding: 1.5em;
+        border: 2px solid #580000;
+        box-sizing: border-box;
+        box-shadow: 3px 0px 3px 5px #900808;">
+            <!-- news comes here  -->
+             <!--news section--> 
+                <!-- content start  -->
+                {%for new in news_objects%}
+                {% comment %} <div class="card">
+                <h5 class="card-header">Featured</h5>
+                <div class="card-body">
+                    <img  alt="32x32" class="mr-2 rounded" src="{% static "base/sih4.png" %}" data-holder-rendered="true" style="width: 32px; height: 32px;">
+                    <h5 class="card-title"><strong id="nm{{new.id}}" class="d-block text-gray-dark"> {{new.title}}</strong></h5>
+                    <p class="card-text">{{new.description}}</p>
+                    <a href="#" class="btn btn-secondary"> Know more </a>
+                </div>
+                
+            </div>
+            <hr> {% endcomment %}
+            <div class="container">
+                <div class="col-md-12">
+                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                      <strong class="d-inline-block mb-2 text-primary"> {{new.title}}</strong>
+                      
+                      <div class="mb-1 text-muted">Nov 12</div>
+                      <strong id="nm{{new.id}}" class="d-block text-gray-dark"> <p class="card-text mb-auto"> {{new.description}}</p>
+                      </strong>
+                    </div> 
+                    <div class="col-auto d-none d-lg-block">
+                        
+            <img src="{% static 'base/sih4.png' %}">
+                    </div>
+                  </div><button type="button" class="btn btn-info">Know More</button>
+                </div>
+                {%endfor%} 
+          
+
+            
+        </div>
+
+
+    </div>
+
+ {%endblock content%}

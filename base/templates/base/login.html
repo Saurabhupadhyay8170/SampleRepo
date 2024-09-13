@@ -1,0 +1,48 @@
+{% extends 'base/main.html' %}
+{%load static%}
+
+{%block title%}Login
+        {%endblock title%}
+
+{% block content %}
+
+
+{% for msg in messages %}
+  {{msg}}
+{% endfor %}
+
+<div class="container" style="width:100%">
+<div class="login-form">
+    <h1>Login Your DashBoard</h1>
+
+        <div class="main">
+            <div class="content">
+                <h2>Login</h2>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+         
+                    <button class="btn" type="submit">Login</button>
+                </form>
+                <p class="account"> Don't Have an acoount ?<a href="{% url 'register' %}">Register</a></p>
+            </div>
+            <div class="form-img">
+                <img  class="img-fluid" src="{% static 'base/loginimage.png'%}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+ 
+var form_fields = document.getElementsByTagName('input')
+form_fields[1].placeholder='Enter Username';
+form_fields[2].placeholder='Enter password';
+
+for (var field in form_fields){	
+    form_fields[field].className += ' form-control'
+}
+</script>
+
+{% endblock content %}

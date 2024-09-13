@@ -1,0 +1,47 @@
+{% extends 'base/SportpersonDash.html' %}
+{% load static %}
+
+{% block content %}
+{% comment %} 
+Stages Page :
+{{user}}:
+ {{user.id}}:
+{{stages.id}} 
+
+ Your Application is
+:{{stages.status}}
+:{{stages.desc}}
+<div class="header-bar">
+    <a href="{% url 'tasks' %}">&#8592; Back</a>
+</div> {% endcomment %}
+
+
+
+<section class="home" style="background-image: url('{% static "base/tue1.jpg" %}');height:150vh;">
+    <div class="text">Hello <span style="color:#900808;">{{request.user|title}}</span>, Physician/ Doctor will provide the prescription here </div>
+  
+    <div class="cont1">
+  
+          <!-- button section  -->
+   
+      <div class="box5">
+
+            <h3 class="card-header" style="color:#900808;">Status</h3>
+            <div class="card-body">
+<h5 style="color:white;">You have {{data}} previously filled forms pending.</h5>
+<div class="box4" style="margin:0px;"><a class="btn btn-outline-danger" href="{% url 'pre' %}">View filled form</a></div>
+                <div class="box4">
+              <h5 class="card-title"> Your last Application is:<span style="color:white;"> {{stages.status}}</span></h5>
+              <p class="card-text"><h5>Doctor/Physician's Prescription:</h5><span style="color:white;">{{stages.desc}}</span></p>
+              <a class="btn btn-outline-danger" href="{% url 'task-create' %}">Ask Question</a>
+            </div>
+  
+        </div>
+        <div class="header-bar" style="padding:3em;">
+            <h6><a href="{% url 'tasks' %}">&#8592; Back</a></h6>
+        </div>
+      </div>
+      </div>
+  </section>
+
+  {% endblock content %}

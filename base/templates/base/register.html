@@ -1,0 +1,70 @@
+{% extends 'base/main.html' %}
+{%load static%}
+
+{% block content %}
+
+{% comment %} {% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+    {{ error }}
+{% endfor %}
+{% endif %}
+{% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %} {% endcomment %}
+
+       
+
+<div class="container" style="width:100%">
+<div class="login-form">
+    <h1>Register Yourself</h1>
+    <div class="container">
+        <div class="main">
+            <div class="content">
+                <h2>
+                    Register</h2>
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form.errors.as_ul }}
+                          </div>
+                        {% endif %}
+                        <label>{{form.username.label}}</label>
+                        {{form.username}}
+
+                        <label>{{form.password1.label}}</label>
+                        {{form.password1}}
+                
+                        <label>{{form.password2.label}}</label>
+                        {{form.password2}}
+
+                        {% comment %} {% for field in form %} {% endcomment %}
+          
+           
+        {% comment %} {% endfor %} {% endcomment %}
+
+                        <button class="btn" type="submit">Register</button>
+                    </form>
+                    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            </div>
+            <div class="form-img">
+                <img class="img-fluid" src="{% static 'base/no.jpeg'%}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+ 
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder='Type a username';
+    form_fields[2].placeholder='Enter password';
+    form_fields[3].placeholder='Confirm password';
+
+    for (var field in form_fields){	
+        form_fields[field].className += ' form-control'
+    }
+    </script>
+
+{% endblock content %}

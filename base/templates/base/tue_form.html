@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----=======BOOTSTRAP CSS========---->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+<style>
+    /* ===== Google Font Import - Poppins ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #900808;
+}
+
+.container {
+    position: relative;
+    max-width: 100%;
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    margin: 0 15px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container header {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.container header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: #4070f4;
+}
+
+.container form {
+    position: relative;
+    margin-top: 15px;
+    min-height: 4000px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.container form .form {
+    position: absolute;
+    background-color: #fff;
+    transition: 0.3s ease;
+}
+
+.container form .form.second {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+}
+
+form.secActive .form.second {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+form.secActive .form.first {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-100%);
+}
+
+.container form .title {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: #333;
+}
+
+.container form .fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+form .fields .input-field {
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+
+.input-field label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+
+.input-field input,
+select {
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+
+.input-field input :focus,
+.input-field select:focus {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+
+.input-field select,
+.input-field input[type="date"] {
+    color: #707070;
+}
+
+.input-field input[type="date"]:valid {
+    color: #333;
+}
+
+.container form button,
+.backBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 25px 0;
+    background-color: #4070f4;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+
+.container form .btnText {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+form button:hover {
+    background-color: #265df2;
+}
+
+form button i,
+form .backBtn i {
+    margin: 0 6px;
+}
+
+form .backBtn i {
+    transform: rotate(180deg);
+}
+
+form .buttons {
+    display: flex;
+    align-items: center;
+}
+
+form .buttons button,
+.backBtn {
+    margin-right: 14px;
+}
+
+@media (max-width: 750px) {
+    .container form {
+        overflow-y: scroll;
+    }
+    .container form::-webkit-scrollbar {
+        display: none;
+    }
+    form .fields .input-field {
+        width: calc(100% / 2 - 15px);
+    }
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <header>Hello {{user}}, please fill this TUE Application</header><br>
+        <div class="header-bar">
+            <a href="{% url 'tasks' %}">&#8592; Go Back</a>
+        </div>
+        <h6>Please complete all sections in capital letters or typing. Athlete to complete sections 1, 2, 3 and 7; Physician to complete sections 4, 5 and 6. Illegible or incomplete applications will be returned and will need to be re-submitted in legible
+            and complete form.</h6>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title"><h4>1. Personal Details</h4></span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Full Name</label>
+                            <input type="text" name="fname" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Date of Birth</label>
+                            <input type="date" name="dob" placeholder="Enter birth date" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Mobile Number</label>
+                            <input type="number" name="phone" placeholder="Enter mobile number" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Gender</label>
+                            <select  name="gender" required>
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Sport</label>
+                            <input type="text" name="sport" placeholder="Sport" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details ID">
+                    <span class="title"><h4>Identity Details</h4></span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>ID Type</label>
+                            <input type="text" name="id_type" placeholder="Enter ID type" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>ID Number</label>
+                            <input type="number" name="id_no" placeholder="Enter ID number" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Name on Id</label>
+                            <input type="text" name="name_on_id" placeholder="Enter your name" required>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="details address">
+                    <span class="title"><h4>Address Details</h4></span>
+
+                    <div class="fields">
+                        <div class="input-field">
+                            <label>Address Type</label>
+                            <input type="text" name="addType" placeholder="Permanent or Temporary" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Nationality</label>
+                            <input type="text" name="nationality" placeholder="Enter nationality" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>State</label>
+                            <input type="text" name="state" placeholder="Enter your state" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>District</label>
+                            <input type="text" name="district" placeholder="Enter your district" required>
+                        </div>
+                        <div class="input-field">
+                            <label>City</label>
+                            <input type="text" name="city" placeholder="Enter your city" required>
+                        </div>
+                        <div class="input-field">
+                            <label>Postal Code</label>
+                            <input type="number" name="postal_code" placeholder="Enter postal code" required>
+                        </div>
+
+
+                    </div>
+                </div>
+ 
+                <div class="details application">
+                    <span class="title"><h4>2. Previous Application</h4></span>
+
+                    <div class="fields">
+
+                        <div class="input-field">
+                            <label>Have you submitted any previous TUE application(s) to any Anti-Doping Organization for the same condition? </label>
+                            <select name="select1" required>
+                                <option disabled selected>Select</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label>For which substance(s) or method(s)?</label>
+                            <input type="text" name="text1" placeholder="Enter text" required>
+                        </div>
+                        <div class="input-field">
+                            <label>To whom?</label>
+                            <input type="text" name="text2" placeholder="Enter text" required>
+                        </div>
+                        <div class="input-field">
+                            <label>When?</label>
+                            <input type="text" name="text3" placeholder="Enter text" required>
+                        </div>
+                        <div class="input-field">
+                            <label>Decision</label>
+                            <select name="select2" required>
+                                <option disabled selected>Select</option>
+                                <option>Approved</option>
+                                <option>Not approved</option>
+                                
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label>Discipline</label>
+                            <input type="text" name="text4" placeholder="Enter text" required>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="details retroactive">
+                        <span class="title"><h4>3. Retroactive Application</h4></span>
+
+                        <div class="fields">
+
+                            <div class="input-field">
+                                <label>Is this a retroactive application?</label>
+                                <select name="select3" required>
+                                    <option disabled selected>Select</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                    
+                                </select>
+                            </div><br>
+                            <div class="input-field">
+                                <label>If yes, on what date was the treatment started?</label>
+                                <input type="text" name="text5" placeholder="Enter text" required>
+                            </div>
+
+                            <div class="details medication">
+                                <span class="title"><h2>Do any of the following exceptions apply?(Article 4.1 of the ISTUE):</h2></span>
+                                <div class="fields">
+                                    <div class="input-field" style="width: 100%;">
+                                        <h3>4.1(a)</h3>You required emergency or urgent treatment of a medical condition.
+
+                                        <select name="select4">
+                                            <option disabled selected>Select</option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                            
+                                        </select>
+                           
+                                        <br>
+                                        <div class="fields">
+                                            <div class="input-field" style="width: 100%;">
+                                                <label><h3>4.1(b)</h3>There was insufficient time, opportunity or other exceptional circumstances that prevented you from submitting the TUE application.</label>
+                                                <select name="select5">
+                                                <option disabled selected>Select</option>
+                                                <option>Yes</option>
+                                                <option>No</option>
+                                                
+                                            </select>
+                                                <br>
+                                            </div>
+
+                                            <div class="fields">
+                                                <div class="input-field" style="width: 100%;">
+                                                    <label><h3>4.1(c)</h3>You were not permitted or required to apply in advance for a TUE as per Click or tap here to enter text. anti-doping rules.</label>
+                                                    <select name="select6">
+                                                    <option disabled selected>Select</option>
+                                                    <option>Yes</option>
+                                                    <option>No</option>
+                                                    
+                                                </select>
+                                                    <br>
+                                                </div>
+
+                                                <div class="fields">
+                                                    <div class="input-field" style="width: 100%;">
+                                                        <label><h3>4.1(d)</h3>You are a lower-level athlete who is not under<br> the jurisdiction of an International Federation or National Anti-Doping Organization and were tested.</label>
+                                                        <select name="select7">
+                                                        <option disabled selected>Select</option>
+                                                        <option>Yes</option>
+                                                        <option>No</option>
+                                                        
+                                                    </select>
+                                                        <br>
+                                                    </div>
+
+                                                    <div class="fields">
+                                                        <div class="input-field" style="width: 100%;">
+                                                            <label><h3>4.1(e)</h3>You tested positive after using a substance Out-of-Competition that was only prohibited In-Competition, e.g., S9 glucocorticoids</label>
+                                                            <select name="select8">
+                                                            <option disabled selected>Select</option>
+                                                            <option>Yes</option>
+                                                            <option>No</option>
+                                                            
+                                                        </select>
+                                                            <br>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <br>
+                                                    <div class="input-field">
+                                                        <option>
+                                                            <h2>Other Retroactive Applications(4.3)</h2>
+                                                        </option>
+                                                        <label>Please explain(if necessary, attach further documents)</label>
+                                                        <input type="text" name="text5" placeholder="Enter text" required>
+                                                    </div>
+                                                    <div class="input-field">
+                                                     <label>Upload documents</label>
+                                                        <input type="file" name="upload1" placeholder="upload" style="border: none;">
+                                                    </div> 
+                                                </div>
+                                                <div class="input-field">
+                                                    <label>In rare and exceptional circumstances notwithstanding any other provision in the ISTUE, an Athlete may apply for and be granted retroactive approval for their TUE if, considering the purpose of the Code, it would be manifestly unfair not to grant a retroactive TUE.
+    
+                                    In order to apply under Article 4.3, please include a full reasoning and attach all necessary supporting documentation. 
+                                    </label>
+                                                    <input type="text" name="text6" placeholder="Enter text" required>
+                                                </div>
+                                              
+                                                <div class="details address">
+                                                    <h2>Physician to complete sections 4, 5 and 6</h2><br>
+                                                    <span class="title"><h4>4. Medical Information</h4></span>
+
+                                                    <div class="fields">
+                                                        <div class="input-field" style="width: 100%;">
+                                                            <label>Diagnosis (Please use the WHO ICD 11 classification if possible)</label>
+                                                            <input type="text" name="text7" placeholder="Enter text">
+                                                        </div>
+
+
+                                                        <div class="details medication">
+                                                            <span class="title"><h4>5. Medication Details</h4></span>
+                                                            <div class="fields">
+                                                                <div class="input-field" style="width: 100%;">
+                                                                    <label>Prohibited Substance(s)/Method(s) Generic name(s)</label>
+                                                                    <input type="text" name="text8" placeholder="Enter text">
+                                                                </div>
+                                                                <div class="fields">
+                                                                    <div class="input-field" style="width: 100%;">
+                                                                        <label>Dosage</label>
+                                                                        <input type="text" name="text9" placeholder="Enter text">
+                                                                    </div>
+                                                                    <div class="fields">
+                                                                        <div class="input-field" style="width: 100%;">
+                                                                            <label>Route of Administration</label>
+                                                                            <input type="text" name="text10" placeholder="Enter text">
+                                                                        </div>
+                                                                        <div class="fields">
+                                                                            <div class="input-field" style="width: 100%;">
+                                                                                <label>Frequency</label>
+                                                                                <input type="text" name="text11" placeholder="Enter text">
+                                                                            </div>
+                                                                            <div class="fields">
+                                                                                <div class="input-field" style="width: 100%;">
+                                                                                    <label>Duration of treatment</label>
+                                                                                    <input type="text" name="text12" placeholder="Enter text">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="details practitionaries">
+                                                                                <span class="title"><h4>6.	Medical Practitioner’s Declaration</h4></span>
+                                                                                <p>I certify that the information in sections 4 and 5 above is accurate. I acknowledge and agree that my personal information may be used by Anti-Doping Organization(s) (ADO)
+                                                                                    to contact me regarding this TUE application, to verify the professional assessment in connection with the TUE process, or in connection with Anti-Doping Rule Violation
+                                                                                    investigations or proceedings.
+                                                                                    <br><br> I further acknowledge and agree that my personal information will be uploaded to the Anti-Doping Administration and Management System (ADAMS) for these purposes
+                                                                                    (see [the Insert link/reference to ADO’s privacy policy and] the ADAMS Privacy Policy for more details</p>
+                                                                                <div class="fields">
+                                                                                    <div class="input-field">
+                                                                                        <label>Name</label>
+                                                                                        <input type="text" name="physicianName" placeholder="Enter your name">
+                                                                                    </div>
+
+                                                                                    <div class="input-field">
+                                                                                        <label>Medical speciality</label>
+                                                                                        <input type="text" name="text13" placeholder="speciality">
+                                                                                    </div>
+                                                                                    <div class="input-field">
+                                                                                        <label>License Number</label>
+                                                                                        <input type="number" name="text14" placeholder="Enter license number">
+                                                                                    </div>
+                                                                                    <div class="input-field">
+                                                                                        <label>License Body</label>
+                                                                                        <input type="text" name="text15" placeholder="Enter text">
+                                                                                    </div>
+                                                                                    <div class="input-field">
+                                                                                        <label>Address</label>
+                                                                                        <input type="text" name="text16" placeholder="Enter your address">
+                                                                                    </div>
+                                                                                    <div class="input-field">
+                                                                                        <label>Nationality</label>
+                                                                                        <input type="text" name="text17" placeholder="Country Name">
+                                                                                    </div>
+
+                                                                                    <div class="input-field">
+                                                                                        <label>City</label>
+                                                                                        <input type="text" name="text18" placeholder="Enter your city">
+                                                                                    </div>
+
+
+
+                                                                                    <div class="input-field">
+                                                                                        <label>Postal Code</label>
+                                                                                        <input type="number" name="text19" placeholder="Enter postal number">
+                                                                                    </div>
+
+
+                                                                                    <div class="input-field">
+                                                                                        <label>Telephone</label>
+                                                                                        <input type="number" name="text20" placeholder="Enter telephone number">
+                                                                                    </div>
+
+                                                                                    <div class="input-field">
+                                                                                        <label>Email</label>
+                                                                                        <input type="email" name="text21" placeholder="Enter your email">
+                                                                                    </div>
+                                                                                    <div class="input-field">
+                                                                                        <label>Fax</label>
+                                                                                        <input type="text" name="text22" placeholder="Enter text">
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="details declaration">
+                                                                                <span class="title"><h4>7. Athelet's Declaration</h4></span>
+                                                                                <div>
+                                                                                    I <input type="text" name="text23" placeholder="enter name" style="border: light;width: 110px;"> , certify that the information set out at sections 1, 2, 3 and 7 is accurate and complete.
+                                                                                    I authorize my physician(s) to release the medical information and records that they deem necessary to evaluate the merits of my TUE application to the following recipients:
+                                                                                    the Anti-Doping Organization(s) (ADO) responsible for making a decision to grant, reject, or recognize my TUE; the World Anti-Doping Agency (WADA), who is responsible
+                                                                                    for ensuring determinations made by ADOs respect the ISTUE; the physicians who are members of relevant ADO(s) and WADA TUE Committees (TUECs) who may need to review my
+                                                                                    application in accordance with the World Anti-Doping Code and International Standards; and, if needed to assess my application, other independent medical, scientific or
+                                                                                    legal experts.
+
+                                                                                </div><br><br>
+                                                                                <div>I further authorize <input type="text" name="text24" placeholder="enter text" style="border: light;"> to release my complete TUE application, including supporting medical information and
+                                                                                    records, to other ADO(s) and WADA for the reasons described above, and I understand that these recipients may also need to provide my complete application to their TUEC
+                                                                                    members and relevant experts to assess my application.<br><br> I have read and understood the TUE Privacy Notice (below) explaining how my personal information will be
+                                                                                    processed in connection with my TUE application, and I accept its terms.
+                                                                                </div><br><br>
+                                                                                <div class="fields">
+                                                                                    <div class="input-field">
+                                                                                        <label><h5>Athelete Signature:</h5></label>
+                                                                                        <input type="file" name="upload2" placeholder="Upload Signature" style="border: none;">
+                                                                                    </div>
+                                                                                    <div class="input-field">
+                                                                                        <label>Date</label>
+                                                                                        <input type="date" name="date2" placeholder="Enter date" required>
+                                                                                    </div>
+                                                                                    <div class="input-field">
+                                                                                        <label><h5>Parent’s/Guardian’s signature:</h5></label>
+                                                                                        <input type="file" name="upload3" placeholder="Upload Signature" style="border: none;">
+                                                                                    </div>
+                                                                                    <div class="input-field">
+                                                                                        <label>Date</label>
+                                                                                        <input type="date" name="date3" placeholder="Enter date" required>
+                                                                                    </div>
+                                                                                </div><br>
+                                                                                <p>(If the Athlete is a Minor or has an impairment preventing them from signing this form, a parent or guardian shall sign on behalf of the Athlete)</p>
+                                                                            </div>
+{% comment %}
+                                                                            <button class="sumbit">
+                                                        <span class="btnText">Submit</span>
+                                                        <i class="uil uil-navigator"></i>
+                                                    </button>
+
+
+
+
+                                                                        </div>
+                                                                    </div> {% endcomment %}
+                                                     <input class="button" type="submit" value="Submit">
+                                                     <div class="header-bar">
+                                                        <a href="{% url 'tasks' %}">&#8592; Go Back</a>
+                                                    </div>                         
+
+        </form>
+        </div>
+
+
+</body>
+
+</html>

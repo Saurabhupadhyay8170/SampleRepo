@@ -1,0 +1,25 @@
+.sec3 {
+    border: 2px solid grey;
+    width: 100%;
+    height: auto;
+    background: #c2b6a1;
+}
+
+.news {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 800;
+    margin-top: 0.5em;
+    font-family: Algerian;
+}
+
+.card-header {
+    color: white;
+    background: #900808;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #900808;
+    border-color: wheat;
+}

@@ -1,0 +1,28 @@
+body{
+    text-align: justify;
+}
+
+#head1{
+    background-color: rgb(19, 42, 148);
+}
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:4em;
+}
+h3{
+    font-family: monospace;
+    color:rgb(60, 61, 3);
+    
+}
+.center {
+    margin: auto;
+    width: 60%;
+    border: 5px solid #050504;
+    
+    padding: 10px;
+    }
+    .hero {
+        background-image: url('2.png');
+        opacity: 0.75;
+        background-size: cover;
+    }
