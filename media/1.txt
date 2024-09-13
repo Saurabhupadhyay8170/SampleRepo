@@ -1,0 +1,60 @@
+python manage.py makemigrations
+python manage.py migrate 
+python manage.py runserver 
+
+
+
+Therapeutic Use Exemption and You
+
+Apply for your TUE at least 21 days before taking part at an event
+
+Only in exceptional cases can a TUE be granted retroactively
+
+Comply with the treatment conditions outlined
+
+Declare the approved medication on the Doping Control Form while being tested
+
+Keep a copy of the TUE certificate handy
+
+TUES do expire, so be vigilant and ensure it is renewed
+
+
+
+UNDERSTAND THE PROHIBITED LIST
+The World Anti-Doping Agency (WADA) produces a list of substances and methods that are banned in sport. It updates this list at least annually, with the new List taking effect on 1 January each year.
+
+The List is divided into substances and methods that are:
+
+Prohibited at all times, or
+Prohibited only In-Competition (In-Competition: The period commencing at 11:59 p.m. on the day before a Competition in which the Athlete is scheduled to participate through to the end of such Competition and the Sample collection process related to such Competition).
+Those substances banned at all times would include (but are not limited to): hormones, anabolics, EPO, beta-2 agonists, masking agents and diuretics. 
+
+Those substances prohibited only in-competition would include but not be limited to: stimulants, marijuana, narcotics and glucocorticosteroids. Also banned at all times: methods such as blood transfusion or manipulation, or intravenous injections in some situations.
+
+It is important to remember that not all substances and methods are named on the Prohibited List. Even if not expressly named, a substance and method can be deemed prohibited if:
+
+It is not currently approved by any governmental regulatory health authority for human therapeutic use (e.g. drugs under pre-clinical or clinical development or discontinued, designer drugs, substances approved only for veterinary use), or
+It has a similar chemical structure or similar biological effect(s).
+A substances or method can be added to the Prohibited List if it is deemed to meet two of the following three criteria:
+
+It has the potential to enhance or enhances sport performance
+Use of the substance or method represents an actual or potential health risk to the athlete
+Use of the substance or method violates the spirit of sport (as described in the introduction to the Code).
+Prohibited substances and methods are classified by the following categories within the List:
+
+S0. Non-approved substances
+S1. Anabolic agents
+S2. Peptide hormones, growth factors, related substances and mimetics
+S3. Beta-2 agonists
+S4. Hormone and metabolic modulators
+S5. Diuretics and masking agents
+S6. Stimulants (in-competition)
+S7. Narcotics (in-competition)
+S8. Cannabinoids (in-competition)
+S9. Glucocorticoids (in-competition)
+M1. Manipulation of blood and blood components
+M2. Chemical and physical manipulation
+M3. Gene doping
+Above all, athletes are responsible for knowing what substances and methods are considered banned on the Prohibited List. Under World Athletics Rules, the presence of a prohibited substance in an athlete’s sample, or the use of a prohibited substance or prohibited method, constitutes a doping offence. 
+
+It is therefore important that you acquaint yourself with WADA’s List of Prohibited Substances and Methods.
